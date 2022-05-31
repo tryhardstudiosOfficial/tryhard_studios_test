@@ -15,7 +15,7 @@ public class Bala : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Enemigo")
         {

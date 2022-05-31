@@ -15,6 +15,7 @@ public class MovimientoEnemigo : MonoBehaviour
 
     void Update()
     {
+        
         movimiento = new Vector2(0, -1);
     }
 

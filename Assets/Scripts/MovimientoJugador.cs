@@ -5,19 +5,21 @@ using UnityEngine;
 public class MovimientoJugador : MonoBehaviour
 {
     public float velocidad;
-    Score score;
     Rigidbody2D rb;
     Vector2 movimiento;
+
+    public GameObject score;
     
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
-        score = GetComponent<Score>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (score.win)
+        
+        if (score.GetComponent<Score>().win)
         {
             gameObject.SetActive(false);
         }

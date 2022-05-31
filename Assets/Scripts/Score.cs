@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-
-    public int puntuacion;
+    public int puntuacion = 0;
     public bool win = false;
-    
-    void Update()
-    {
-        if (puntuacion >= 10)
-        {
-            win = true;
-        }
-    }
 }
