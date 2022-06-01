@@ -18,11 +18,6 @@ public class MovimientoJugador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (score.GetComponent<Score>().win)
-        {
-            gameObject.SetActive(false);
-        }
         movimiento = new Vector2(Input.GetAxis("Horizontal"), 0);
     }
 

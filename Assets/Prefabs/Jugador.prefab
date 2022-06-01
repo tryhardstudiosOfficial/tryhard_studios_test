@@ -44,12 +44,11 @@ GameObject:
   - component: {fileID: 6692247709261080032}
   - component: {fileID: 9086306889785601359}
   - component: {fileID: 1310880589}
-  - component: {fileID: -1381348683122208198}
   - component: {fileID: 8964546465731833138}
   - component: {fileID: -1430399833779372271}
   m_Layer: 0
   m_Name: Jugador
-  m_TagString: Player
+  m_TagString: Jugador
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,20 +163,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidad: 8
   score: {fileID: 7283445795015488921, guid: 50f465364995b8b43800ef030a44d9bf, type: 3}
---- !u!114 &-1381348683122208198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2671923254831639486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19425359e9ccbb94585d20595329cde6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  puntuacion: 0
-  win: 0
 --- !u!54 &8964546465731833138
 Rigidbody:
   m_ObjectHideFlags: 0

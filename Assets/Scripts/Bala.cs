@@ -6,13 +6,14 @@ public class Bala : MonoBehaviour
 {
     public float velocidad;
     public float daño;
-    public int limite = 10;
+    public int limite = 20;
     void FixedUpdate()
     {
         transform.Translate(Vector2.up * velocidad * Time.deltaTime);
         if (transform.position.y > limite)
         {
-            gameObject.SetActive(false);
+            gameObject.transform.position= new Vector2(20, 20);
+            transform.Translate(Vector2.up * 0 * Time.deltaTime);
         }
     }
     void OnTriggerEnter(Collider col)
@@ -20,7 +21,8 @@ public class Bala : MonoBehaviour
         if (col.gameObject.tag == "Enemigo")
         {
             col.gameObject.GetComponent<VidaEnemigo>().RecibirDaño(daño);
-            gameObject.SetActive(false);
+            gameObject.transform.position = new Vector2(20, 20);
+            transform.Translate(Vector2.up * 0 * Time.deltaTime);
         }
     }
 }

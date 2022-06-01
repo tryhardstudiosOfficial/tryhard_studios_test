@@ -10,7 +10,7 @@ public class Disparo : MonoBehaviour
     public int cantidadBalas = 10;
 
     bool disparando = true;
-    
+    bool recargasndo = true;
 
     GameObject[] balas;
 
@@ -31,6 +31,13 @@ public class Disparo : MonoBehaviour
                 StartCoroutine(Disparar());
             }
         }
+        if (Input.GetButton("Fire2")) 
+        {
+            if (recargasndo)
+            {
+                StartCoroutine(Recargar());
+            }
+        }
     }
 
     IEnumerator Disparar(){
@@ -42,8 +49,24 @@ public class Disparo : MonoBehaviour
                 balas[i].transform.position = canon.transform.position;
                 break;
             }
-        }disparando = false;
-        yield return new WaitForSeconds(1);
+                 
+        }
+        if (balas[9].activeInHierarchy)
+        {
+            StartCoroutine(Recargar());
+        }
+        disparando = false;
+        yield return new WaitForSeconds(0.5f);
         disparando = true;
-    }    
+    }
+
+    IEnumerator Recargar(){
+        recargasndo = false;
+        yield return new WaitForSeconds(2);
+        recargasndo = true;
+        for (int i = 0; i < balas.Length; i++)
+        {
+            balas[i].SetActive(false);
+        }
+    }
 }

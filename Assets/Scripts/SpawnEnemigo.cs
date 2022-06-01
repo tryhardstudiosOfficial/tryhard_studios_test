@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class SpawnEnemigo : MonoBehaviour
 {
-
     public float min_X;
     public float max_X;
+    public float min_Tiempo;
+    public float max_Tiempo;
     public GameObject enemigoPrefab;
-    public int cantidadEnemigos;
-
-    public int frecuencia;
 
     bool spawn = true;
 
     Vector2 posicionEnemigo;
-    GameObject[] enemigos;
-    
+
     void Update()
     {
         if (spawn)
@@ -26,6 +23,7 @@ public class SpawnEnemigo : MonoBehaviour
     }
     IEnumerator SpawnearEnemigos()
     {
+        float frecuencia = Random.Range(min_Tiempo, max_Tiempo);
         posicionEnemigo = new Vector2(Random.Range(min_X, max_X), 10);
         Instantiate(enemigoPrefab, posicionEnemigo, Quaternion.identity);
         spawn = false;

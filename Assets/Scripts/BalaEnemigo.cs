@@ -15,9 +15,9 @@ public class BalaEnemigo : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Jugador")
         {
             col.gameObject.GetComponent<VidaJugador>().RecibirDaño(daño);
             gameObject.SetActive(false);

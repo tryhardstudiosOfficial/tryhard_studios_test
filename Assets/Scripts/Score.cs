@@ -5,5 +5,5 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     public int puntuacion = 0;
-    public bool win = false;
+    //public bool win = false;
 }
