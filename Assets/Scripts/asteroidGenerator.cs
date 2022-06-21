@@ -44,6 +44,7 @@ public class asteroidGenerator : MonoBehaviour
 
          float gravity = UnityEngine.Random.Range(0.3f,0.7f);
          asteroid.GetComponent<Rigidbody2D>().gravityScale = gravity;
+         asteroid.GetComponent<asteroidScript>().StartFloating(endPoint.transform.position.y);
      }
 
      void AttemptSpawn(){

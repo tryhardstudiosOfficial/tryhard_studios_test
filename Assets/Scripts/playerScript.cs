@@ -29,6 +29,8 @@ public class playerScript : MonoBehaviour
     public float tick;
     private Collider2D collider2d;
 
+    public AudioSource ShotSound;
+
 
     private void Awake()
     {
@@ -56,6 +58,7 @@ public class playerScript : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
+                ShotSound.Play();
                 throwingWeapon = true;
                 Vector2 newPosition = new Vector2(transform.position.x, transform.position.y + 1);
                 GameObject cross = Instantiate(projectile, newPosition, Quaternion.identity);

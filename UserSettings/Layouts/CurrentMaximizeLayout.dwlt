@@ -87,7 +87,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -227,9 +227,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 62c5ffff
-      m_LastClickedID: -15006
-      m_ExpandedIDs: f844ffff4eb4ffff9eb4ffffccb4ffff58c5ffff62c5ffff
+      m_SelectedIDs: 1eb5ffff
+      m_LastClickedID: -19170
+      m_ExpandedIDs: 40bffefff844ffff4eb4ffff9eb4ffffccb4ffffc6bcffff58c5ffff62c5ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -245,7 +245,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 5}
+        m_ClientGUIView: {fileID: 7}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -527,9 +527,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.1449468, y: 3.0720718, z: -0.30170986}
+    m_Target: {x: 1.5515566, y: 1.6624712, z: -10.301515}
     speed: 2
-    m_Value: {x: -2.1449468, y: 3.0720718, z: -0.30170986}
+    m_Value: {x: 1.5515566, y: 1.6624712, z: -10.301515}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -580,9 +580,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 22.281881
+    m_Target: 32.395374
     speed: 2
-    m_Value: 22.281881
+    m_Value: 32.395374
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -702,22 +702,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/2D pixel asteroids
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/2D pixel asteroids
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\sergi\Documents\Carerra Desarrollo Web Full Stack\Desarrollo
     Web\PortfolioDesdeCero\tryhard_studios_test
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: b0910000
-    m_LastClickedID: 37296
+    scrollPos: {x: 0, y: 27}
+    m_SelectedIDs: 849b0000
+    m_LastClickedID: 39812
     m_ExpandedIDs: 00000000aa91000014970000309700004297000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -771,9 +771,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 62c5ffff
-    m_LastClickedInstanceID: -15006
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 1eb5ffff
+    m_LastClickedInstanceID: -19170
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -790,7 +790,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 7}
+      m_ClientGUIView: {fileID: 10}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -850,8 +850,8 @@ MonoBehaviour:
     y: 0
     width: 455
     height: 947
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}

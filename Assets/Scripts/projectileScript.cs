@@ -12,13 +12,13 @@ public class projectileScript : MonoBehaviour
     public float speed;
 
     private Rigidbody2D rigidbody2D;
-
+    GameObject playerGameObject;
 
     // Start is called before the first frame update
     private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-        //player = GameObject.FindGameObjectWithTag("player");
+        playerGameObject = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Start()
@@ -46,6 +46,7 @@ public class projectileScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            playerGameObject.GetComponent<playerScript>().gameManager.sumScore(5);
             Destroy(collision.gameObject);
             Debug.Log("colision with tag: " + collision.gameObject.tag.ToString());
             Destroy(gameObject);

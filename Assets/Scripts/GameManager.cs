@@ -92,34 +92,16 @@ public class GameManager : MonoBehaviour
             menuPrincipal.SetActive(false);
 
             // mover fondo
-            //fondo.material.mainTextureOffset = fondo.material.mainTextureOffset + new Vector2(0.02f, 0) * Time.deltaTime;
-
-            //Mover maapa
-            /*for (int i = 0; i < cols.Count; i++)
-            {
-                if (cols[i].transform.position.x <= -10)
-                {
-                    cols[i].transform.position = new Vector3(10, -3, 0);
-
-                }
-                cols[i].transform.position = cols[i].transform.position + new Vector3(-1, 0, 0) * Time.deltaTime * velocidad;
-            }*/
-
-            //Mover obstaculos
-            /*for (int i = 0; i < obstaculos.Count; i++)
-            {
-                if (obstaculos[i].transform.position.x <= -10)
-                {
-                    float randomObs = Random.Range(11, 18);
-                    obstaculos[i].transform.position = new Vector3(randomObs, -2, 0);
-                }
-                obstaculos[i].transform.position = obstaculos[i].transform.position + new Vector3(-1, 0, 0) * Time.deltaTime * velocidad;
-            }*/
+            fondo.material.mainTextureOffset = fondo.material.mainTextureOffset + new Vector2(0.02f, 0) * Time.deltaTime;
         }
 
         if (TextScore != null)
         {
             TextScore.text = ScoreString + ": " + Score.ToString();
         }
+    }
+
+    public void sumScore(int num){
+        Score = Score + num;
     }
 }

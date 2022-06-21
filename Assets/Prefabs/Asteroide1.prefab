@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8922047814740197277}
   - component: {fileID: 3313534074994758064}
   - component: {fileID: 1725033138473934042}
+  - component: {fileID: 6973775456238241541}
   m_Layer: 0
   m_Name: Asteroide1
   m_TagString: Enemy
@@ -123,3 +124,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6973775456238241541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8535502560531877469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 380ad4c3d2103bf43a38d2c1e8315604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  endPosY: 0
