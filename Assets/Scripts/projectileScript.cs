@@ -46,7 +46,7 @@ public class projectileScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            playerGameObject.GetComponent<playerScript>().gameManager.sumScore(5);
+            playerGameObject.GetComponent<playerScript>().gameManager.sumScore(1);
             Destroy(collision.gameObject);
             Debug.Log("colision with tag: " + collision.gameObject.tag.ToString());
             Destroy(gameObject);

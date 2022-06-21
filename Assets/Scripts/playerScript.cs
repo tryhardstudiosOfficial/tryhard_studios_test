@@ -10,17 +10,22 @@ public class playerScript : MonoBehaviour
     public Camera mainCamera;
     //public GameObject playerCanvas;
 
-    public int maxHealth = 100;
-    public int currentHealth;
+    public int vidas;
+    public int maxVidas;
     //public BarScript healthBar;
 
     public GameManager gameManager;
     public Rigidbody2D rigidbody2D;
+
     private Animator animator;
     private SpriteRenderer spriteR;
+
     public float defaultSpeed;
     public float speed;
+
     public GameObject projectile;
+    public int municion;
+    public int maxMunicion;
     //
     public GameObject lastProjectile;
     public bool throwingWeapon = false;
@@ -30,6 +35,14 @@ public class playerScript : MonoBehaviour
     private Collider2D collider2d;
 
     public AudioSource ShotSound;
+
+    public Text vidasText;
+    public Text municionText;
+    public GameObject sinMunicionText;
+
+    public float recargaDuracion;
+    public bool recargando;
+    public Text contadorRecarga;
 
 
     private void Awake()
@@ -41,11 +54,15 @@ public class playerScript : MonoBehaviour
     void Start()
     {
         speed = defaultSpeed;
+        municion = maxMunicion;
+        vidas = maxVidas;
         //playerCanvas = transform.Find("playerCanvas").gameObject;
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         spriteR = GetComponent<SpriteRenderer>();
         collider2d = GetComponent<Collider2D>();
+        municionText.text = "municion: " + maxMunicion;
+        vidasText.text = "vidas: " + maxVidas;
     }
 
     // Update is called once per frame
@@ -56,8 +73,10 @@ public class playerScript : MonoBehaviour
         if (gameManager.start == true && gameManager.gameOver == false)
         {
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && municion > 0)
             {
+                municion--;
+                municionText.text = "municion: " + municion;
                 ShotSound.Play();
                 throwingWeapon = true;
                 Vector2 newPosition = new Vector2(transform.position.x, transform.position.y + 1);
@@ -69,9 +88,31 @@ public class playerScript : MonoBehaviour
                 //cross.SetActive(true);
                 cross.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 500f), ForceMode2D.Force);
                 lastProjectile = cross;
+            } else if (Input.GetKeyDown(KeyCode.Mouse0) && municion <= 0 && !recargando){
+                sinMunicionText.SetActive(true);
             }
 
-            if (currentHealth <= 0)
+            if(Input.GetKeyDown(KeyCode.R) && municion <= 0 && !recargando){
+                recargaDuracion = 3;
+                sinMunicionText.SetActive(false);
+                recargando = true;
+            }
+
+            if(recargaDuracion > 0){
+                contadorRecarga.text = "recargando: " + (int)recargaDuracion;
+                recargaDuracion -= Time.deltaTime;
+            }
+
+            if(recargaDuracion <= 0 && recargando){
+                recargando = false;
+                contadorRecarga.text = "";
+                municion = maxMunicion;
+                municionText.text = "municion: " + maxMunicion;
+            }
+
+
+
+            if (vidas <= 0)
             {
                 gameManager.gameOver = true;
             }
@@ -111,36 +152,17 @@ public class playerScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
-            //Physics2D.IgnoreLayerCollision(7, 10, true);
-            //takeDamage(3,collision.gameObject.GetComponent<enemy>().lookingRight);
+            takeDamage(1);
+            Destroy(collision.gameObject);
         }
     }
 
-    public void takeDamage(int damage, bool directionOfHit)
+    public void takeDamage(int damage)
     {
-        /*if ((currentHealth - damage) > 0)
-        { 
-            if (directionOfHit){
-                rigidbody2D.AddForce(new Vector2(200, 50));
-            } else {
-                rigidbody2D.AddForce(new Vector2(-200, 50));
-            }
-            inmune = true;
-            inmuneCountDown = 2;
-            gameManager.inmune.SetActive(true);
-
-            audioS.enabled = true;
-            currentHealth -= damage;
-            healthBar.SetValue(currentHealth);
-        }
-        else if ((currentHealth - damage) <= 0)
-        {
-            currentHealth = 0;
-            healthBar.SetValue(0);
-        }
-*/
+        vidas = vidas - damage;
+        vidasText.text = "vidas: " + vidas;
     }
 
 

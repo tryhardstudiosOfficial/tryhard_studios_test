@@ -102,7 +102,7 @@ MonoBehaviour:
   destroyTime: 3
   destroyColdown: 0
   damage: 5
-  speed: 5
+  speed: 16
 --- !u!50 &3135202939419946425
 Rigidbody2D:
   serializedVersion: 4

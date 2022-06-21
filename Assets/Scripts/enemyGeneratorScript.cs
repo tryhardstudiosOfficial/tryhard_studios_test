@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class asteroidGenerator : MonoBehaviour
+public class enemyGeneratorScript : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] asteroids;
+    GameObject[] enemys;
 
     [SerializeField]
     float spawnInterval;
@@ -32,32 +32,32 @@ public class asteroidGenerator : MonoBehaviour
         
     }
 
-     void SpawnAsteroid(Vector2 startPos){
-         int randomIndex = UnityEngine.Random.Range(0, asteroids.Length);
-         GameObject asteroid = Instantiate(asteroids[randomIndex],this.transform);
+     void SpawnEnemy(Vector2 startPos){
+         int randomIndex = UnityEngine.Random.Range(0, enemys.Length);
+         GameObject enemy = Instantiate(enemys[randomIndex],this.transform);
 
          float startX = UnityEngine.Random.Range(startPos.x - 5f, startPos.x + 5f);
-         asteroid.transform.position = new Vector2(startX, startPos.y);
+         enemy.transform.position = new Vector2(startX, startPos.y);
 
-         float scale = UnityEngine.Random.Range(0.3f,0.6f);
-         asteroid.transform.localScale = new Vector2(scale,scale);
+         float scale = UnityEngine.Random.Range(0.5f,0.7f);
+         enemy.transform.localScale = new Vector2(scale,scale);
 
-         float gravity = UnityEngine.Random.Range(0.3f,0.7f);
-         asteroid.GetComponent<Rigidbody2D>().gravityScale = gravity;
-         asteroid.GetComponent<asteroidScript>().StartFloating(endPoint.transform.position.y);
+         float gravity = UnityEngine.Random.Range(0.1f,0.2f);
+         enemy.GetComponent<Rigidbody2D>().gravityScale = gravity;
+         enemy.GetComponent<enemyScript>().StartFloating(endPoint.transform.position.y);
      }
 
      void AttemptSpawn(){
          //check some things.
-         SpawnAsteroid(startPos);
+         SpawnEnemy(startPos);
 
         Invoke("AttemptSpawn", spawnInterval);
      }
 
      void Prewarm(){
-         for (int i = 0; i < 2; i++){
+         for (int i = 0; i < 1; i++){
              Vector2 spawnPos = Vector2.right * (i * 2) + startPos;
-             SpawnAsteroid(spawnPos);
+             SpawnEnemy(spawnPos);
          }
      }
      

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject menuPrincipal;
     public GameObject menuGameOver;
+    public GameObject asteroidGenerator;
+    public GameObject enemyGenerator;
 
     public static int Score = 0;
     public string ScoreString = "time";
@@ -52,6 +54,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        Screen.SetResolution(240, 180, true);
     }
 
     // Update is called once per frame
@@ -64,6 +68,8 @@ public class GameManager : MonoBehaviour
                 start = true;
                 Score = 0;
                 timer = 0;
+                asteroidGenerator.SetActive(true);
+                enemyGenerator.SetActive(true);
             }
         }
 
@@ -84,7 +90,7 @@ public class GameManager : MonoBehaviour
 
             if (timer > 2f)
             {
-                Score += 1;
+                //Score += 1;
                 //Reset the timer to 0.
                 timer = 0;
             }
