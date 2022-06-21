@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
             menuPrincipal.SetActive(false);
 
             // mover fondo
-            fondo.material.mainTextureOffset = fondo.material.mainTextureOffset + new Vector2(0.02f, 0) * Time.deltaTime;
+            fondo.material.mainTextureOffset = fondo.material.mainTextureOffset + new Vector2(0.005f, 0) * Time.deltaTime;
         }
 
         if (TextScore != null)
