@@ -35,6 +35,7 @@ public class playerScript : MonoBehaviour
     private Collider2D collider2d;
 
     public AudioSource ShotSound;
+    public AudioSource PowerSound;
 
     public Text vidasText;
     public Text municionText;
@@ -53,16 +54,14 @@ public class playerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = defaultSpeed;
-        municion = maxMunicion;
-        vidas = maxVidas;
+
         //playerCanvas = transform.Find("playerCanvas").gameObject;
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         spriteR = GetComponent<SpriteRenderer>();
         collider2d = GetComponent<Collider2D>();
-        municionText.text = "municion: " + maxMunicion;
-        vidasText.text = "vidas: " + maxVidas;
+
+        playerStart();
     }
 
     // Update is called once per frame
@@ -88,22 +87,27 @@ public class playerScript : MonoBehaviour
                 //cross.SetActive(true);
                 cross.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 500f), ForceMode2D.Force);
                 lastProjectile = cross;
-            } else if (Input.GetKeyDown(KeyCode.Mouse0) && municion <= 0 && !recargando){
+            }
+            else if (Input.GetKeyDown(KeyCode.Mouse0) && municion <= 0 && !recargando)
+            {
                 sinMunicionText.SetActive(true);
             }
 
-            if(Input.GetKeyDown(KeyCode.R) && municion <= 0 && !recargando){
+            if (Input.GetKeyDown(KeyCode.R) && municion <= 0 && !recargando)
+            {
                 recargaDuracion = 3;
                 sinMunicionText.SetActive(false);
                 recargando = true;
             }
 
-            if(recargaDuracion > 0){
+            if (recargaDuracion > 0)
+            {
                 contadorRecarga.text = "recargando: " + (int)recargaDuracion;
                 recargaDuracion -= Time.deltaTime;
             }
 
-            if(recargaDuracion <= 0 && recargando){
+            if (recargaDuracion <= 0 && recargando)
+            {
                 recargando = false;
                 contadorRecarga.text = "";
                 municion = maxMunicion;
@@ -157,6 +161,31 @@ public class playerScript : MonoBehaviour
             takeDamage(1);
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.tag == "Power")
+        {
+
+            powerScript.PowerType powerType = collision.gameObject.GetComponent<powerScript>().powerType;
+            
+            switch (powerType)
+            {
+                default:
+                case powerScript.PowerType.Limpiador: gameManager.killAllEnemies();
+                    break;
+                case powerScript.PowerType.Curador: heal(1);
+                    break;
+                case powerScript.PowerType.Invencibilidad: Invencibilidad();
+                    break;
+                case powerScript.PowerType.Descontrol: Descontrol();
+                    break;
+                case powerScript.PowerType.Aniquilador: takeDamage(2);
+                    break;
+            }
+
+            print ("se uso: " + powerType.ToString());    
+            PowerSound.Play();
+            Destroy(collision.gameObject);
+        }
     }
 
     public void takeDamage(int damage)
@@ -166,21 +195,31 @@ public class playerScript : MonoBehaviour
     }
 
 
-    public void heal(int hp)
+    public void heal(int vida)
     {
-        /*currentHealth += hp;
-        healthBar.SetValue(currentHealth);*/
+        vidas = vidas+vida;
+        vidasText.text = "vidas: " + vidas;
     }
 
-    /*public void getVelocity()
-    {
-        Debug.Log("velocidad * 2");
-        defaultRunSpeed = defaultRunSpeed * 2;
-        runSpeed = defaultRunSpeed;
-    }*/
+    public void Invencibilidad(){
+        Debug.Log("Invencible");
+    }
+
+    public void Descontrol(){
+        Debug.Log("descontrol");
+    }
 
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    public void playerStart()
+    {
+        speed = defaultSpeed;
+        municion = maxMunicion;
+        vidas = maxVidas;
+        municionText.text = "municion: " + maxMunicion;
+        vidasText.text = "vidas: " + maxVidas;
     }
 }
