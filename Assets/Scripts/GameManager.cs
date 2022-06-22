@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
 
     public bool start = false;
 
+    public int killcount;
+
     void Awake()
     {
         current = this;
@@ -124,12 +126,15 @@ public class GameManager : MonoBehaviour
         Score = Score + num;
     }
 
-    public void killAllEnemies()
+    public int killAllEnemies()
     {
+        
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
+            killcount++;
             GameObject.Destroy(enemy);
         }
+        return killcount;
     }
 }

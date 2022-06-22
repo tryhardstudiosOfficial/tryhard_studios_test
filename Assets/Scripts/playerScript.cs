@@ -77,7 +77,7 @@ public class playerScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0) && municion > 0)
             {
                 municion--;
-                municionText.text = "municion: " + municion;
+                municionText.text = "Municion: " + municion;
                 ShotSound.Play();
                 throwingWeapon = true;
                 Vector2 newPosition = new Vector2(transform.position.x, transform.position.y + 1);
@@ -104,7 +104,7 @@ public class playerScript : MonoBehaviour
 
             if (recargaDuracion > 0)
             {
-                contadorRecarga.text = "recargando: " + (int)recargaDuracion;
+                contadorRecarga.text = "Recargando: " + (int)recargaDuracion;
                 recargaDuracion -= Time.deltaTime;
             }
 
@@ -113,7 +113,7 @@ public class playerScript : MonoBehaviour
                 recargando = false;
                 contadorRecarga.text = "";
                 municion = maxMunicion;
-                municionText.text = "municion: " + maxMunicion;
+                municionText.text = "Municion: " + maxMunicion;
             }
 
 
@@ -181,7 +181,7 @@ public class playerScript : MonoBehaviour
             switch (powerType)
             {
                 default:
-                case powerScript.PowerType.Limpiador: gameManager.killAllEnemies();
+                case powerScript.PowerType.Limpiador: gameManager.sumScore(gameManager.killAllEnemies());
                     break;
                 case powerScript.PowerType.Curador: heal(1);
                     break;
@@ -204,14 +204,14 @@ public class playerScript : MonoBehaviour
     public void takeDamage(int damage)
     {
         vidas = vidas - damage;
-        vidasText.text = "vidas: " + vidas;
+        vidasText.text = "Vidas: " + vidas;
     }
 
 
     public void heal(int vida)
     {
         vidas = vidas+vida;
-        vidasText.text = "vidas: " + vidas;
+        vidasText.text = "Vidas: " + vidas;
     }
 
     public void Invencibilidad(){
@@ -232,7 +232,7 @@ public class playerScript : MonoBehaviour
         speed = defaultSpeed;
         municion = maxMunicion;
         vidas = maxVidas;
-        municionText.text = "municion: " + maxMunicion;
-        vidasText.text = "vidas: " + maxVidas;
+        municionText.text = "Municion: " + maxMunicion;
+        vidasText.text = "Vidas: " + maxVidas;
     }
 }
