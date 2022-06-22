@@ -12,8 +12,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject menuPrincipal;
     public GameObject menuGameOver;
+
     public GameObject asteroidGenerator;
     public GameObject enemyGenerator;
+    public GameObject powerGenerator;
 
     public int highScore;
     public Text texHighScore;
@@ -60,6 +62,7 @@ public class GameManager : MonoBehaviour
                 timer = 0;
                 asteroidGenerator.SetActive(true);
                 enemyGenerator.SetActive(true);
+                powerGenerator.SetActive(true);
             }
         }
 
@@ -75,6 +78,7 @@ public class GameManager : MonoBehaviour
             killAllEnemies();
             asteroidGenerator.SetActive(false);
             enemyGenerator.SetActive(false);
+            powerGenerator.SetActive(false);
 
 
 

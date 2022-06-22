@@ -45,6 +45,8 @@ public class playerScript : MonoBehaviour
     public bool recargando;
     public Text contadorRecarga;
 
+    public Text PowerText;
+    public float ShowPowerTextCount;
 
     private void Awake()
     {
@@ -150,6 +152,15 @@ public class playerScript : MonoBehaviour
             //animator.SetBool("isDeath", true);
             //deathAudio.enabled = true;
         }
+
+        if(ShowPowerTextCount > 0 ){
+            ShowPowerTextCount -= Time.deltaTime;
+            PowerText.gameObject.SetActive(true);
+        } else {
+            PowerText.gameObject.SetActive(false);
+        }
+
+
     }
 
 
@@ -182,7 +193,9 @@ public class playerScript : MonoBehaviour
                     break;
             }
 
-            print ("se uso: " + powerType.ToString());    
+            print ("se uso: " + powerType.ToString()); 
+            ShowPowerTextCount = 3;
+            PowerText.text = "Power: " + powerType.ToString();   
             PowerSound.Play();
             Destroy(collision.gameObject);
         }
