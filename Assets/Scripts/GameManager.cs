@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject menuPrincipal;
     public GameObject menuGameOver;
+    public GameObject infoPanel;
 
     public GameObject asteroidGenerator;
     public GameObject enemyGenerator;
@@ -39,6 +40,8 @@ public class GameManager : MonoBehaviour
 
     public int killcount;
 
+    public GameObject musicaPrincipal;
+
     void Awake()
     {
         current = this;
@@ -55,18 +58,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (start == false)
-        {
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                start = true;
-                Score = 0;
-                timer = 0;
-                asteroidGenerator.SetActive(true);
-                enemyGenerator.SetActive(true);
-                powerGenerator.SetActive(true);
-            }
-        }
 
         if (start == true && gameOver == true)
         {
@@ -78,12 +69,7 @@ public class GameManager : MonoBehaviour
             menuGameOver.SetActive(true);
 
             killAllEnemies();
-            asteroidGenerator.SetActive(false);
-            enemyGenerator.SetActive(false);
-            powerGenerator.SetActive(false);
-
-
-
+            setOffGenerators();
 
             if (Input.GetKeyDown(KeyCode.X))
             {
@@ -128,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     public int killAllEnemies()
     {
-        
+
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
@@ -136,5 +122,59 @@ public class GameManager : MonoBehaviour
             GameObject.Destroy(enemy);
         }
         return killcount;
+    }
+
+    public void StartGame()
+    {
+        if (start == false)
+        {
+            start = true;
+            Score = 0;
+            timer = 0;
+            asteroidGenerator.SetActive(true);
+            enemyGenerator.SetActive(true);
+            powerGenerator.SetActive(true);
+        }
+    }
+
+    public void doExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void showInfo(bool condicion)
+    {
+        infoPanel.SetActive(condicion);
+    }
+
+    public void exitToMenu()
+    {
+        setOffGenerators();
+        killAllEnemies();
+        menuGameOver.SetActive(false);
+        player.GetComponent<playerScript>().playerStart();
+        menuPrincipal.SetActive(true);
+        player.transform.position = new Vector2(0, player.transform.position.y);
+        start = false;
+        gameOver = false;
+    }
+
+    public void setOffGenerators()
+    {
+        asteroidGenerator.SetActive(false);
+        enemyGenerator.SetActive(false);
+        powerGenerator.SetActive(false);
+    }
+
+    public void turnOffMusic()
+    {
+        if (musicaPrincipal.activeSelf)
+        {
+            musicaPrincipal.SetActive(false);
+        }
+        else
+        {
+            musicaPrincipal.SetActive(true);
+        }
     }
 }
