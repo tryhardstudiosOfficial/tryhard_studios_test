@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         Screen.SetResolution(240, 180, true);
     }
 
@@ -76,6 +76,16 @@ public class GameManager : MonoBehaviour
         if (start == true && gameOver == true)
         {
             menuGameOver.SetActive(true);
+
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                GameObject.Destroy(enemy);
+            }
+            asteroidGenerator.SetActive(false);
+            enemyGenerator.SetActive(false);
+
+
             if (Input.GetKeyDown(KeyCode.X))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -107,7 +117,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void sumScore(int num){
+    public void sumScore(int num)
+    {
         Score = Score + num;
     }
 }
