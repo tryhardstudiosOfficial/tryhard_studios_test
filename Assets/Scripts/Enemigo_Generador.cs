@@ -11,7 +11,7 @@ public class Enemigo_Generador : MonoBehaviour
         if (Enemigo_Generador.instance != null && Enemigo_Generador.instance != this) Destroy(gameObject);
         if (Enemigo_Generador.instance == null) instance = this;
     }
-
+    public bool ON = true;
     private float range;
     [SerializeField]
     private float mintime;
@@ -35,9 +35,16 @@ public class Enemigo_Generador : MonoBehaviour
 
         timetosummon = Random.Range(mintime, maxtime);
     }
-
+    public void restart()
+    {
+        if (ON) return;
+        ON = true;
+        timetosummon = Random.Range(mintime, maxtime);
+        actualtime = 0;
+    }
     void Update()
     {
+        if (!ON) return;
         if(actualtime>= timetosummon)
         {
             summonEnemigo();

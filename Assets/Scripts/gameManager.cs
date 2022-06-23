@@ -10,7 +10,7 @@ public class gameManager : MonoBehaviour
 
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         else
         {
@@ -36,4 +36,11 @@ public class gameManager : MonoBehaviour
         puntuacion_maxima = puntuacion;
         nombre_puntuacion_maxima = nombre_Actual;
     }
+
+    public int get_max()
+    {
+        return puntuacion_maxima;
+    }
+    public string get_name() { return nombre_puntuacion_maxima; }
+    public string get_player() { return nombre_Actual; }
 }

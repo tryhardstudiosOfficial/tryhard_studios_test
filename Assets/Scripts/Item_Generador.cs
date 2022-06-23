@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Item_Generador : MonoBehaviour
 {
+    public bool ON= true;
     private Control_Nave Nave;
 
     [SerializeField]
@@ -36,8 +37,18 @@ public class Item_Generador : MonoBehaviour
 
         Nave = GameObject.FindWithTag("Player").GetComponent<Control_Nave>();
     }
+    public void restart()
+    {
+        if (ON) return;
+        ON = true;
+        totaltime_debuff = Random.Range(12f, 15f);
+        totaltime_buff = Random.Range(15f, 20f);
+        actualtime_buff = 0;
+        actualtime_debuff = 0;
+    }
     private void Update()
     {
+        if (!ON) return;
         if (actualtime_buff >= totaltime_buff) InvokeBuff();
         if (actualtime_debuff >= totaltime_debuff) InvokeDebuff();
 

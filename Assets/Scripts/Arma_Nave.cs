@@ -16,7 +16,8 @@ public class Arma_Nave : MonoBehaviour
     [SerializeField]
     private bool reloading;
 
-
+    [SerializeField]
+    TMPro.TMP_Text mUNICION;
     public void Disparar()
     {
         if (reloading || enfriamiento > 0) return;
@@ -24,6 +25,7 @@ public class Arma_Nave : MonoBehaviour
         Pool_Balas.instance.disparar(this.transform.position);
         enfriamiento += 0.5f;
         Balas_Cantidad_Actual--;
+        mUNICION.text = "Municion: " + Balas_Cantidad_Actual;
     }
 
     private void Update()
@@ -37,12 +39,23 @@ public class Arma_Nave : MonoBehaviour
         while (Reload_time < Reload_Tiempo_total)
         {
             yield return null;
-            Reload_time += 1 * Time.deltaTime;   
+            Reload_time += 1 * Time.deltaTime;
+            mUNICION.text = "Municion: "+"Reloading" + (Reload_Tiempo_total-Reload_time);
         }
         Balas_Cantidad_Actual = Balas_Cantidad_maxima;
         Debug.Log("full reload");
         reloading = false;
         Reload_time = 0;
+        mUNICION.text = "Municion: " + Balas_Cantidad_Actual;
         yield return null;
+    }
+    private void OnEnable()
+    {
+        Balas_Cantidad_Actual = Balas_Cantidad_maxima;
+        reloading = false;
+        Reload_time = 0;
+        enfriamiento = 0;
+        mUNICION.text = "Municion: " + Balas_Cantidad_Actual;
+
     }
 }

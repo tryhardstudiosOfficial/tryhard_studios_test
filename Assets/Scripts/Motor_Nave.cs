@@ -11,7 +11,8 @@ public class Motor_Nave : MonoBehaviour
 
     [SerializeField]
     private float Descontrol_tiempo;
-
+    [SerializeField]
+    TMPro.TMP_Text invertedui;
     private void Start()
     {
         var camara = Camera.main;
@@ -40,12 +41,22 @@ public class Motor_Nave : MonoBehaviour
     }
 
     private IEnumerator Invertir()
-    {       
+    {
+        invertedui.gameObject.SetActive(true);
         while (Descontrol_tiempo > 0)
         {
             yield return null;      
             Descontrol_tiempo -= 1 * Time.deltaTime;
+            invertedui.text = "Descontrol: " + Descontrol_tiempo;
         }
+
+        invertedui.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        Descontrol_tiempo = 0;
+        invertedui.gameObject.SetActive(false);
 
     }
 }
