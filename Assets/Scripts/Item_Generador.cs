@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Item_Generador : MonoBehaviour
 {
+    private Control_Nave Nave;
+
     [SerializeField]
     private GameObject Prefab_Item;
 
@@ -31,6 +33,8 @@ public class Item_Generador : MonoBehaviour
         range = camara_size;
 
         totaltime_debuff = Random.Range(12f, 15f);
+
+        Nave = GameObject.FindWithTag("Player").GetComponent<Control_Nave>();
     }
     private void Update()
     {
@@ -45,8 +49,39 @@ public class Item_Generador : MonoBehaviour
 
     private void InvokeBuff()
     {
-       
 
+        totaltime_buff = Random.Range(15f, 20f);
+
+        if (Buffs.Count <= 0)
+        {
+            var firstitem =
+            Instantiate(Prefab_Item, new Vector2(Random.Range(-range, range), range), Prefab_Item.transform.rotation);
+            firstitem.GetComponent<SpriteRenderer>().color = Color.yellow;
+            firstitem.GetComponent<collision_item>().SetItem(RandomBuff());
+            Buffs.Add(firstitem);
+            actualtime_buff = 0;
+            return;
+        }
+
+        foreach (GameObject b in Buffs)
+        {
+            if (!b.activeInHierarchy)
+            {
+                b.transform.position = new Vector2(Random.Range(-range, range), range);
+                b.GetComponent<collision_item>().SetItem(RandomBuff());
+                b.GetComponent<SpriteRenderer>().color = Color.yellow;
+                b.SetActive(true);
+                actualtime_buff = 0;
+                return;
+            }
+        }
+
+        var item =
+           Instantiate(Prefab_Item, new Vector2(Random.Range(-range, range), range), Prefab_Item.transform.rotation);
+        item.GetComponent<collision_item>().SetItem(RandomBuff());
+        item.GetComponent<SpriteRenderer>().color = Color.yellow;
+        Buffs.Add(item);
+        actualtime_buff = 0;
 
 
 
@@ -104,5 +139,26 @@ public class Item_Generador : MonoBehaviour
         }
 
 
+    }
+
+    Item RandomBuff()
+    {
+        Item buff;
+        switch (Random.Range(1, 4))
+        {
+            case 1:
+                
+                buff = Nave.get_vida().VidaAmount() < 3 ?new Buff_lifesup():new buff_shield();
+                return buff;
+            case 2:
+                buff = new buff_shield();
+                return buff;
+            case 3:
+                buff = new Buff_KILLALL();
+                return buff;
+            default:
+                buff = new Buff_KILLALL();
+                return buff;
+        }
     }
 }

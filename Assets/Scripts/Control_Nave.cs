@@ -43,7 +43,7 @@ public class Control_Nave : MonoBehaviour
 
         if (collision.CompareTag("enemigo"))
         {
-
+            vida.Damage(1);
         }
     }
 

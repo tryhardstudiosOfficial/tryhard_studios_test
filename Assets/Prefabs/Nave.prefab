@@ -146,6 +146,7 @@ MonoBehaviour:
   Botones: 610000006400000020000000
   motor: {fileID: 1740296693}
   Arma: {fileID: 1740296698}
+  vida: {fileID: 9122307173084137638}
 --- !u!114 &1740296698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,3 +196,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b07654c692292c545ae39a274a1291b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Vida: 3
