@@ -11,18 +11,26 @@ public class Arma_Nave : MonoBehaviour
     [SerializeField]
     private float Reload_Tiempo_total;
     private float Reload_time;
-
+    [SerializeField]
+    private float enfriamiento = 0;
     [SerializeField]
     private bool reloading;
+
+
     public void Disparar()
     {
-        if (reloading) return;
+        if (reloading || enfriamiento > 0) return;
         if (Balas_Cantidad_Actual <= 0) { reloading = true; StartCoroutine(Reload()); return; }
-        Debug.Log("bang");
+        Pool_Balas.instance.disparar(this.transform.position);
+        enfriamiento += 0.5f;
         Balas_Cantidad_Actual--;
     }
 
-
+    private void Update()
+    {
+        if(enfriamiento>0)
+        enfriamiento -= Time.deltaTime;
+    }
     private IEnumerator Reload()
     {
         Debug.Log("reloading");

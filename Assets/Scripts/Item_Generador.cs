@@ -161,4 +161,11 @@ public class Item_Generador : MonoBehaviour
                 return buff;
         }
     }
+
+
+    public void limpiar()
+    {
+        foreach (GameObject b in Buffs) b.SetActive(false);
+        foreach (GameObject d in Debuffs) d.SetActive(false);
+    }
 }

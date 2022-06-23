@@ -8,7 +8,7 @@ public class Enemigo_Generador : MonoBehaviour
 
     private void Awake()
     {
-        if (Enemigo_Generador.instance != this) Destroy(gameObject);
+        if (Enemigo_Generador.instance != null && Enemigo_Generador.instance != this) Destroy(gameObject);
         if (Enemigo_Generador.instance == null) instance = this;
     }
 
