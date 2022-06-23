@@ -16,17 +16,13 @@ public class GameManager : MonoBehaviour {
     public EnemySpawner EnemySpawner;
     public PowerItemSpawner PowerItemSpawner;
 
-    public string CurrentPlayerName;
-    public int CurrentPlayerScore;
-
-    public string HighScoreName;
-    public int HighScore;
+    public PlayerData PlayerData;
 
     public MeshRenderer Map;
 
     public UIManager UIManager;
 
-    void Awake() {
+    void Start() {
         if (Instance != null && Instance != this) { 
             Destroy(this); 
         } else { 
@@ -34,21 +30,24 @@ public class GameManager : MonoBehaviour {
         } 
 
         Player = GameObject.Instantiate(PlayerPrefab,PlayerSpawnPoint.position, PlayerSpawnPoint.rotation);
+        PlayerData.CurrentPlayerScore = 0;
 
         Random.InitState(Random.Range(0,15000));
         IsGamePlaying = true;
-        EnemySpawner.enabled = true;
-        PowerItemSpawner.enabled = true;
 
         UIManager.GameOverPanel.SetActive(false);
+
+        EnemySpawner.enabled = true;
+        EnemySpawner.StartSpawning();
+        PowerItemSpawner.enabled = true;
+        PowerItemSpawner.StartSpawning();
     }
 
     public void AddPointsToPlayer(int points){
-        CurrentPlayerScore += points;
+        PlayerData.CurrentPlayerScore += points;
     }
 
     public void GameOver() {
-        Debug.Log("Game Over");
         IsGamePlaying = false;
         EnemySpawner.enabled = false;
         PowerItemSpawner.enabled = false;
@@ -59,9 +58,9 @@ public class GameManager : MonoBehaviour {
 
         Destroy(Player);
 
-        if(CurrentPlayerScore > HighScore){
-            HighScore = CurrentPlayerScore;
-            HighScoreName = CurrentPlayerName;
+        if(PlayerData.CurrentPlayerScore > PlayerData.HighScore){
+            PlayerData.HighScore = PlayerData.CurrentPlayerScore;
+            PlayerData.HighScoreName = PlayerData.PlayerName;
         }
 
         UIManager.GameOverPanel.SetActive(true);
@@ -81,7 +80,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void RestartGame() {
-        Awake();
+    public void RestartGame() {        
+        Start();
     }
 }

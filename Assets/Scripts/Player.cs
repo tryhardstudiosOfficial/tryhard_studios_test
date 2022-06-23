@@ -17,11 +17,12 @@ public class Player : MonoBehaviour {
     public float InvertedControlsTime = 0f;
 
     public PowerItemData CurrentPowerItem;
+    public float CurrentPowerItemTime = 0f;
+    public float LastReloadTime;
 
     MeshRenderer Map;
 
     float lastFire = 0;
-    float lastReloadTime = 0;
     float defaultInvincibleTime = 2f;
     Vector3 startPosition;
     Bounds bounds;
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour {
     void Awake() {
         Lives = StartingLives;
         Shoots = StartingShoots;
+        LastReloadTime = ShootReloadTime;
         startPosition = transform.position;
         bounds = GetComponent<MeshRenderer>().bounds;
     }
@@ -50,9 +52,13 @@ public class Player : MonoBehaviour {
 
         bool isFiring = Input.GetButton("Fire1");
 
-        if(lastReloadTime >= ShootReloadTime){
-            lastReloadTime = 0f;
-            Shoots = Mathf.Min(Shoots+1,15);
+        if(Shoots == 0f){
+            if(LastReloadTime <= 0f){
+                LastReloadTime = ShootReloadTime;
+                Shoots = 15;
+            }else{
+                LastReloadTime -= Time.deltaTime;
+            }
         }
 
         if(isFiring && lastFire >= ShootRate && Shoots > 0f){
@@ -62,13 +68,16 @@ public class Player : MonoBehaviour {
         }
         
         lastFire += Time.deltaTime;
-        lastReloadTime += Time.deltaTime;
         
         if(InvincibleTime > 0f){
             InvincibleTime -=Time.deltaTime;
         }
         if(InvertedControlsTime > 0f){
             InvertedControlsTime -= Time.deltaTime;
+        }
+
+        if(CurrentPowerItemTime >0f){
+            CurrentPowerItemTime = Mathf.Max(CurrentPowerItemTime - Time.deltaTime, 0f);
         }
     }
 

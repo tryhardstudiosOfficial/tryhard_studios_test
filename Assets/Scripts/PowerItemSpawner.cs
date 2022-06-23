@@ -11,7 +11,7 @@ public class PowerItemSpawner : MonoBehaviour {
     MeshRenderer Map;
     Player player;
 
-    private void OnEnable() {
+    public void StartSpawning() {
         player = GameManager.Instance.Player.GetComponent<Player>();
         Map = GameManager.Instance.Map;
         StartCoroutine(SpawnPowerUpItems());

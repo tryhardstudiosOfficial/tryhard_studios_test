@@ -43,11 +43,13 @@ public class PowerItem : MonoBehaviour {
     }
 
     public void MakePlayerInvincible(){
-        Player.InvincibleTime = 10f;
+        Player.InvincibleTime = PowerItemData.PowerItemDuration;
+        Player.CurrentPowerItemTime = PowerItemData.PowerItemDuration;
     }
 
     public void InvertControls(){
-        Player.InvertedControlsTime = 10f;
+        Player.InvertedControlsTime = PowerItemData.PowerItemDuration;
+        Player.CurrentPowerItemTime = PowerItemData.PowerItemDuration;
     }
 
     public void Anihilate(){

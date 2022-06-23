@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
     
@@ -11,6 +12,8 @@ public class UIManager : MonoBehaviour {
     public Text CurrentPowerItemDescription;
     public Text CurrentPowerItemTime;
     public Text BulletsLeft;
+    public GameObject BulletsReloadingPanel;
+    public Text BulletsReloading;
     public Text LivesLeft;
 
     public GameObject GameOverPanel;
@@ -19,14 +22,14 @@ public class UIManager : MonoBehaviour {
     public Text HighScoreName;
     public Text HighScore;
 
-    //Tiempo para mostar el power up si no tiene duracion
-    float defaultShownTime = 2f;
-    float currentShowTime = 0f;
+    PlayerData PlayerData;
 
     void Start() {
         player = GameManager.Instance.Player.GetComponent<Player>();
 
-        PlayerName.text = GameManager.Instance.CurrentPlayerName;
+        PlayerData = GameManager.Instance.PlayerData;
+
+        PlayerName.text = PlayerData.PlayerName;
     }
 
     void Update() {
@@ -34,20 +37,37 @@ public class UIManager : MonoBehaviour {
         if(GameManager.Instance.IsGamePlaying){
             if(player == null) Start();
             
-            PlayerScore.text = GameManager.Instance.CurrentPlayerScore.ToString();
+            PlayerScore.text = PlayerData.CurrentPlayerScore.ToString();
             LivesLeft.text = player.Lives.ToString();
             BulletsLeft.text = player.Shoots.ToString();
+            if(player.LastReloadTime < player.ShootReloadTime){
+                BulletsReloading.text = player.LastReloadTime.ToString("0.00") + " segundos";
+                BulletsReloadingPanel.SetActive(true);
+            }else{
+                BulletsReloadingPanel.SetActive(false);
+            }
 
-            if(player.CurrentPowerItem != null && currentShowTime <= Mathf.Max(defaultShownTime, player.CurrentPowerItem.PowerItemDuration)){
+            if(player.CurrentPowerItem != null){
                 CurrentPowerItemName.text = player.CurrentPowerItem.PowerItemName;
                 CurrentPowerItemDescription.text = player.CurrentPowerItem.PowerItemDescription;
-                CurrentPowerItemTime.text = player.CurrentPowerItem.PowerItemDuration + " segundos faltantes";
+                if(player.CurrentPowerItemTime > 0f){
+                    CurrentPowerItemTime.text = player.CurrentPowerItemTime.ToString("0.00") + " segundos faltantes";
+                }else{
+                    CurrentPowerItemTime.text = "";
+                }
+            }else{
+                CurrentPowerItemName.text = "";
+                CurrentPowerItemDescription.text = "";
             }
         }else{
-            CurrentName.text = GameManager.Instance.CurrentPlayerName;
-            CurrentScore.text = GameManager.Instance.CurrentPlayerScore.ToString();
-            HighScoreName.text = GameManager.Instance.HighScoreName;
-            HighScore.text = GameManager.Instance.HighScore.ToString();
+            CurrentName.text = PlayerData.PlayerName;
+            CurrentScore.text = PlayerData.CurrentPlayerScore.ToString();
+            HighScoreName.text = PlayerData.HighScoreName;
+            HighScore.text = PlayerData.HighScore.ToString();
         }
+    }
+
+    public void BackToMenu(){
+        SceneManager.LoadScene("MainScene");
     }
 }

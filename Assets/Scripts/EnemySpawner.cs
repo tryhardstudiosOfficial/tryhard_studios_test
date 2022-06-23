@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour {
     MeshRenderer Map;
 
 
-    private void OnEnable() {
+    public void StartSpawning() {
         Map = GameManager.Instance.Map;
         StartCoroutine(SpawnEnemies());
     }
